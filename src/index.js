@@ -3,6 +3,8 @@ import { ApolloServer } from 'apollo-server-express';
 import { createServer } from 'http';
 
 import schema from './schema';
+import models from './models';
+import resolvers from './schema/resolvers';
 
 require('dotenv').config();
 
@@ -12,6 +14,8 @@ const app = express();
 
 const server = new ApolloServer({
   ...schema,
+  resolvers,
+  context: { models },
   instrospection: true,
   playground: true,
   tracing: true,

@@ -29,4 +29,6 @@ export default (sequelize, DataTypes) => {
       allowNull: true,
     },
   });
+
+  return User;
 };
