@@ -1,4 +1,4 @@
-# NodeJS + GraphQL Backend for WeDevChat Platform
+# NodeJS + GraphQL Backend for WeDevReward Platform
 
 ## Quick start
 
