@@ -12,6 +12,15 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: '00000000-0000-0000-0000-000000000001',
+        firstName: 'Lau',
+        lastName: 'Suaria',
+        username: 'lauSuaria@gmail.com',
+        password: '123456789',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
   down: (queryInterface, Sequelize) => {
