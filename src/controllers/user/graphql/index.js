@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 export const findAll = (obj, args, context) => {
   console.log(context.models.user);
   return context.models.user.findAll(args);
@@ -13,7 +15,7 @@ export const findUserById = (obj, args, context) => {
 
 export const createUser = async (obj, args, context) => {
   const newUser = await context.models.user.create({
-    id: args.id,
+    id: uuidv4(),
     firstName: args.firstName,
     lastName: args.lastName,
     username: args.username,

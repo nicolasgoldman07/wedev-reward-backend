@@ -17,7 +17,6 @@ extend type Query {
 # Mutations
 extend type Mutation {
   createUser(
-    id: String!
     firstName: String!
     lastName: String!
     username: String!
