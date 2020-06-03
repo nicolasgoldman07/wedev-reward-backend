@@ -26,3 +26,26 @@ export const createUser = async (obj, args, context) => {
 
   return newUser;
 };
+
+export const signUpUser = async (obj, args, context) => {
+  console.dir(args.data);
+  // Creates de user in DB
+
+  const newUser = await context.models.user.create({
+    id: uuidv4(),
+    firstName: args.data.firstName,
+    lastName: args.data.lastName,
+    username: args.data.username,
+    password: args.data.password,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  });
+
+  const authenticationResult = {
+    user: newUser,
+    jwt: 'jwt',
+    authError: 'authError',
+  };
+
+  return authenticationResult;
+};

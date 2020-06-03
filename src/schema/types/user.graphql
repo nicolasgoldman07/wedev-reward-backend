@@ -1,3 +1,11 @@
+# Input types
+input SignupInput {
+  firstName: String!
+  lastName: String!
+  username: String!
+  password: String!
+}
+
 # Types
 type User {
   id: ID!
@@ -6,6 +14,12 @@ type User {
   lastName: String!
   createdAt: Date
   updatedAt: Date
+}
+
+type AuthenticationResult {
+  user: User
+  jwt: String
+  authError: String
 }
 
 # Queries
@@ -22,4 +36,5 @@ extend type Mutation {
     username: String!
     password: String!
   ): User!
+  signUpUser(data: SignupInput!): AuthenticationResult!
 }
