@@ -6,6 +6,11 @@ input SignupInput {
   password: String!
 }
 
+input SigninInput {
+  username: String!
+  password: String!
+}
+
 # Types
 type User {
   id: ID!
@@ -30,11 +35,6 @@ extend type Query {
 
 # Mutations
 extend type Mutation {
-  createUser(
-    firstName: String!
-    lastName: String!
-    username: String!
-    password: String!
-  ): User!
   signUpUser(data: SignupInput!): AuthenticationResult!
+  signInUser(data: SigninInput!): AuthenticationResult!
 }
