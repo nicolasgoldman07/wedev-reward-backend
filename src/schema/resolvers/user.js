@@ -7,7 +7,8 @@ const resolvers = {
   },
 
   Mutation: {
-    createUser: userController.createUser,
+    signUpUser: userController.signUpUser,
+    signInUser: userController.signInUser,
   },
 };
 
