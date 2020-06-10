@@ -7,7 +7,7 @@ export const findAll = (obj, args, context) => {
 };
 
 export const findUserById = async (obj, args, context) => {
-  return context.models.user.findAll({
+  return context.models.user.findOne({
     where: {
       id: args.id,
     },
