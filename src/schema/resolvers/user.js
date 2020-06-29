@@ -4,6 +4,7 @@ const resolvers = {
   Query: {
     users: userController.findAll,
     user: userController.findUserById,
+    currentUser: userController.getCurrentUser,
   },
 
   Mutation: {

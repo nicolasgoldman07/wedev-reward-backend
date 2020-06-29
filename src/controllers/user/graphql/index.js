@@ -14,6 +14,10 @@ export const findUserById = async (obj, args, context) => {
   });
 };
 
+export const getCurrentUser = async (obj, args, context) => {
+  return context.user;
+};
+
 export const signUpUser = async (obj, args, context) => {
   let user = {};
   let token = null;
