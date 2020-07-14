@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+const jwt = require('jsonwebtoken');
 
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('user', {
@@ -35,6 +36,19 @@ export default (sequelize, DataTypes) => {
     return User.encryptPassword(value, this.salt) === this.password;
   };
 
+  User.prototype.getJWT = function () {
+    const payload = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+    };
+    const options = {
+      subject: this.id,
+      expiresIn: '10d',
+    };
+
+    return jwt.sign(payload, process.env.SECRET, options);
+  };
+
   // Class methods
   User.hashPasswordHook = async function (user) {
     if (!user.password || !user.changed('password')) return user;
@@ -49,6 +63,14 @@ export default (sequelize, DataTypes) => {
 
   User.encryptPassword = function (plainPassword, salt) {
     return crypto.scryptSync(plainPassword, salt, 64).toString('hex');
+  };
+
+  User.findUserByUsername = async function (username) {
+    return await this.findOne({
+      where: {
+        username: username,
+      },
+    });
   };
 
   // hooks
