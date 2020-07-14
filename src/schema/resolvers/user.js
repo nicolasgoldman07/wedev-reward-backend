@@ -4,10 +4,12 @@ const resolvers = {
   Query: {
     users: userController.findAll,
     user: userController.findUserById,
+    currentUser: userController.getCurrentUser,
   },
 
   Mutation: {
-    createUser: userController.createUser,
+    signUpUser: userController.signUpUser,
+    signInUser: userController.signInUser,
   },
 };
 

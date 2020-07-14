@@ -1,3 +1,16 @@
+# Input types
+input SignupInput {
+  firstName: String!
+  lastName: String!
+  username: String!
+  password: String!
+}
+
+input SigninInput {
+  username: String!
+  password: String!
+}
+
 # Types
 type User {
   id: ID!
@@ -8,18 +21,22 @@ type User {
   updatedAt: Date
 }
 
+type AuthenticationResult {
+  user: User
+  jwt: String
+  authError: String
+}
+
 # Queries
 extend type Query {
   users: [User]!
-  user(id: ID!): [User]!
+  user(id: ID!): User!
+  userByUsername(username: String!): User!
+  currentUser: User
 }
 
 # Mutations
 extend type Mutation {
-  createUser(
-    firstName: String!
-    lastName: String!
-    username: String!
-    password: String!
-  ): User!
+  signUpUser(data: SignupInput!): AuthenticationResult!
+  signInUser(data: SigninInput!): AuthenticationResult!
 }
