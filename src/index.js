@@ -17,7 +17,7 @@ const app = express();
 const server = new ApolloServer({
   ...schema,
   resolvers,
-  context: async ({ req, res }) => ({ models, user: req.user }),
+  context: async ({ req, res }) => ({ models, user: req.user || null }),
   instrospection: true,
   playground: true,
   tracing: true,
