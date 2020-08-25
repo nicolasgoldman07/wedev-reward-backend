@@ -1,80 +1,64 @@
-# NodeJS + GraphQL Backend for WeDevReward Platform
+# Backend (NodeJs) repository - WeDevelop WeRewards App
 
-## Quick start
+[![N|Solid](https://i.ibb.co/YQ4Xv7B/wedevelop-logo-f3beb597-1.png)](https://wedevelop.me/)
 
-- Clone the repo:
+Project made for WeDevelop training program (Fullstack Developer - Javascript). It consists in 3 GitHub repositories.
+
+- **Main (Docker)**: https://github.com/nicolasgoldman07/wedev-reward-docker
+- **Backend**: https://github.com/nicolasgoldman07/wedev-reward-backend
+- **Frontend**: https://github.com/nicolasgoldman07/wedev-reward-frontend
+
+# Installation
+
+For start using the application, you must:
+
+```sh
+$ git clone [GITHUB REPOSITORY] [PROJECT DIRECTORY]
+$ cd [PROJECT DIRECTORY]
+$ npm install -d
+```
+
+for each of the repositories (backend, frontent and docker).
+
+Project structure must be:
 
 ```
-git clone git@github.com:abelosorio/graphql-boilerplate.git <your-project>
+PROJECT_DIR/
+    |---- FRONTEND/
+    |        |-- node_modules
+    |        |-- [frontend-files]
+    |---- BACKEND/
+    |        |-- node_modules
+    |        |-- [backend-files]
+    |---- pg/(created by postgres container)
+    |        |-- pg_data/..
+    |---- docker-compose.yml
+    |---- init.sql
+    |---- README.md
 ```
 
-- Remove the remote `origin` (replace it by yours):
+# Running the application
+
+Once you have the project structure ready with node modules installed, you're ready to start the project with:
 
 ```
-git remote remove origin
-git remote add origin <your-repository-url>
+docker-compose up
 ```
 
-- Run `npm install`.
-- That's it! You can now run the project with `npm run dev` for development environments or `npm run build && npm run start` for production.
+(You must already have docker and docker compose installed in order to start it)
 
-## Skeleton
+# Stoping the application
 
-- `dist`: Distribution folder. It contains transpiled files.
-- `src`: Source code folder.
+To stop the container from running, you must:
 
-  - `schema`: GraphQL schema files.
+```
+docker-compose down
+```
 
-    - `resolvers`: Resolver files (Javascript code). Here you can write your
-      resolver methods by creating JS files exporting an object with the
-      resolvers. Example:
+# Docker information
 
-      ```javascript
-      const resolvers = {
-        Query: {
-          people: (_, args) => [{ firstname: 'Abel', lastname: 'Osorio' }],
-        },
-      };
+Docker compose will start 3 services.
 
-      export default resolvers;
-      ```
-
-      All the files will be merged into a single file.
-
-    - `types`: Type files (GraphQL code). Here you will write your types in
-      GraphQL code. Also, this is the place to define Queries, Mutations,
-      Subscriptions, Inputs, or any other kind of type for your schema. Example:
-
-      ```graphql
-      type Person {
-        firstname: String
-        lastname: String
-      }
-
-      extend type Query {
-        people: [Person]
-      }
-      ```
-
-      Again, all these files will be merged into a single file, so make
-      sure of extending from the root types.
-
-## Dependencies
-
-It has a very few dependencies (as you can see in the package.json file):
-
-- apollo-server-express
-- dotenv
-- express
-- graphql
-- http
-- lodash
-
-And other dev dependencies to run the project and transpile it:
-
-- @babel/cli
-- @babel/core
-- @babel/node
-- @babel/preset-env
-- babel-plugin-root-import
-- nodemon
+- **_Postgres:_** Container with volume for data persistance, mapped in local port 5432 and with PostgreSQL official image. It will create `/pg` directory in root, and run `init.sql`for creating the database for the project.
+- **_Backend:_** Image builded with Dockerfile (see backend project repository). Mapped to 3001 port locally. For testing, access to `localhost:3000/graphql`.
+- **_Postgres:_** Image builded with Dockerfile (see frontend project repository). Mapped to 3000 port locally.

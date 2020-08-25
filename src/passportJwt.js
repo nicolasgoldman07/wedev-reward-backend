@@ -1,4 +1,6 @@
 import passport from 'passport';
+import models from './models';
+
 require('dotenv').config();
 
 export default function (req, res, next) {

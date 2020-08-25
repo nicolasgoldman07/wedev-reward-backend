@@ -3,5 +3,4 @@ dist
 .env
 src/config
 .vscode
-Dockerfile
 .dockerignore
