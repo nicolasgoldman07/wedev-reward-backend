@@ -1,18 +1,18 @@
-import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
-import { createServer } from 'http';
+import express from 'express'
+import { ApolloServer } from 'apollo-server-express'
+import { createServer } from 'http'
 
-import passportInit from './passportJwt';
+import passportInit from './passportJwt'
 
-import schema from './schema';
-import models from './models';
-import resolvers from './schema/resolvers';
+import schema from './schema'
+import models from './models'
+import resolvers from './schema/resolvers'
 
-require('dotenv').config();
+require('dotenv').config()
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3001
 
-const app = express();
+const app = express()
 
 const server = new ApolloServer({
   ...schema,
@@ -21,19 +21,19 @@ const server = new ApolloServer({
   instrospection: true,
   playground: true,
   tracing: true,
-});
+})
 
-app.use(passportInit);
+app.use(passportInit)
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app })
 
-const httpServer = createServer(app);
+const httpServer = createServer(app)
 
-server.installSubscriptionHandlers(httpServer);
+server.installSubscriptionHandlers(httpServer)
 
 httpServer.listen({ port }, () => {
-  console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`);
+  console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`)
   console.log(
     `Subscriptions ready at ws://localhost:${port}${server.subscriptionsPath}`,
-  );
-});
+  )
+})
